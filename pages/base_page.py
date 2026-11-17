@@ -1,8 +1,8 @@
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException, ElementClickInterceptedException
-from selenium.webdriver.common.by import By
 from config.config import DEFAULT_TIMEOUT
+from locators.base_page_locators import BasePageLocators
 
 class BasePage:
     def __init__(self, driver):
@@ -12,7 +12,7 @@ class BasePage:
     def wait_for_overlay_to_disappear(self):
         try:
             WebDriverWait(self.driver, 3).until(
-                EC.invisibility_of_element_located((By.CLASS_NAME, "Modal_modal_overlay__x2ZCr"))
+                EC.invisibility_of_element_located(BasePageLocators.MODAL_OVERLAY)
             )
         except TimeoutException:
             pass
